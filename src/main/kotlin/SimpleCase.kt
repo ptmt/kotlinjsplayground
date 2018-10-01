@@ -10,7 +10,7 @@ fun runSimpleCase() {
 
 
 abstract class OpDescriptor {
-    abstract fun perform(affected: Any?): Any?
+    abstract fun perform(affected: SomethingWithState): Any?
 }
 
 class SomethingWithState() {
@@ -22,9 +22,9 @@ class SomethingWithState() {
     }
 
     private class UnlockOp(val queue: Empty): OpDescriptor() {
-        override fun perform(affected: Any?): Any? {
+        override fun perform(affected: SomethingWithState): Any? {
             val update: Any = Empty()
-            (affected as SomethingWithState)._state.compareAndSet(this@UnlockOp, update)
+            affected._state.compareAndSet(this@UnlockOp, update)
             return if (affected._state.value == Empty()) null else affected;
         }
     }

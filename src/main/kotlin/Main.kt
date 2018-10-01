@@ -3,7 +3,8 @@ package main
 fun main(args: Array<String>) {
     val message = "Hello JavaScript!"
     println(message)
-    runMutexCase()
+    // runAwaitAll() - uncomment for awaitAll() bug
+    // runMutexCase() - uncomment for mutex bug
 }
 
 
